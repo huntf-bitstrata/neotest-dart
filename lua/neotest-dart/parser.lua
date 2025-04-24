@@ -192,7 +192,13 @@ M.parse_lines = function(tree, lines, outline)
     local value = node:data()
     if value.type == 'test' then
       local test_name = utils.construct_test_name(value, outline)
-      local test_result = tests[test_name]
+      local test_result = nil
+      for full_name, result in pairs(tests) do
+        if string.match(full_name, test_name) then
+          test_result = result
+          break
+        end
+      end
       if test_result then
         local neotest_result = {
           status = construct_neotest_status(test_result),
