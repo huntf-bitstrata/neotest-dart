@@ -194,7 +194,7 @@ M.parse_lines = function(tree, lines, outline)
       local test_name = utils.construct_test_name(value, outline)
       local test_result = nil
       for full_name, result in pairs(tests) do
-        if string.match(full_name, test_name) then
+        if string.find(full_name, test_name, 1, true) then
           test_result = result
           break
         end
